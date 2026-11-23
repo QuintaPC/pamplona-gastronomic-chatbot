@@ -97,6 +97,18 @@ st.markdown("""
     font-size: 16px;
     line-height: 1.6;
 }
+/* Texto de las respuestas del chatbot */
+[data-testid="stChatMessage"],
+[data-testid="stChatMessage"] * {
+    color: #302622 !important;
+}
+
+/* Fondo de los mensajes */
+[data-testid="stChatMessage"] {
+    background-color: #FFFDF9 !important;
+    border-radius: 12px;
+    padding: 16px;
+}
 </style>
 
 <div class="gourmet-hero">
