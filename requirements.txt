@@ -1,0 +1,9 @@
+streamlit>=1.35,<2
+python-dotenv>=1,<2
+langchain-community>=0.3,<1
+langchain-text-splitters>=0.3,<1
+langchain-huggingface>=0.1,<2
+langchain-chroma>=0.2,<2
+langchain-google-genai>=2,<4
+sentence-transformers>=3,<6
+pypdf>=5,<7
