@@ -5,8 +5,110 @@ from dotenv import load_dotenv
 from rag_core import load_documents, make_chunks, make_store, answer_question, EMBEDDING_MODEL
 
 load_dotenv(override=True)
-st.set_page_config(page_title="Pamplona Gastronomic Assistant", page_icon="🍽️")
-st.title("🍽️ Pamplona Gastronomic Assistant")
+
+st.markdown("""
+<style>
+.stApp {
+    background-color: #F5F0E7;
+    color: #33252A;
+}
+
+/* Main content and header */
+[data-testid="stHeader"] {
+    background-color: #F5F0E7;
+}
+
+[data-testid="stBottom"] {
+    background-color: #F5F0E7;
+}
+
+
+/* Navarra Gourmet chat input */
+[data-testid="stBottom"] {
+    background-color: #F5F0E7 !important;
+}
+
+[data-testid="stBottom"] > div {
+    background-color: #F5F0E7 !important;
+}
+
+[data-testid="stChatInput"] {
+    background-color: #FFFFFF !important;
+    border: 1px solid #B89560 !important;
+    border-radius: 14px !important;
+}
+
+[data-testid="stChatInput"] > div {
+    background-color: #FFFFFF !important;
+}
+
+[data-testid="stChatInput"] textarea {
+    background-color: #FFFFFF !important;
+    color: #33252A !important;
+    -webkit-text-fill-color: #33252A !important;
+    caret-color: #651D32 !important;
+}
+
+[data-testid="stChatInput"] textarea::placeholder {
+    color: #82767A !important;
+    opacity: 1 !important;
+}
+
+
+/* Main text */
+[data-testid="stMain"] {
+    color: #33252A;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #651D32;
+    color: #F5F0E7;
+}
+
+[data-testid="stSidebar"] * {
+    color: #F5F0E7;
+}
+
+.gourmet-hero {
+    background: linear-gradient(135deg, #651D32, #421321);
+    padding: 42px 38px;
+    border-radius: 18px;
+    margin-bottom: 26px;
+    border-bottom: 4px solid #B89560;
+}
+
+.gourmet-label {
+    color: #DCC5A0;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.gourmet-title {
+    color: #FFFFFF;
+    font-size: 43px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 16px 0;
+}
+
+.gourmet-subtitle {
+    color: #E9DCD7;
+    font-size: 16px;
+    line-height: 1.6;
+}
+</style>
+
+<div class="gourmet-hero">
+    <div class="gourmet-label">NAVARRA · GASTRONOMY · DISCOVERY</div>
+    <div class="gourmet-title">Discover Pamplona,<br>one restaurant at a time.</div>
+    <div class="gourmet-subtitle">
+        Your personal guide to the flavors, traditions and
+        culinary experiences of Pamplona.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 st.caption("A document-grounded restaurant guide • AI Technology Final Project")
 
 @st.cache_resource(show_spinner="Reading and indexing restaurant PDFs…")
@@ -26,7 +128,45 @@ with st.sidebar:
 
 try:
     store, count, chunks = prepare()
-    st.success(f"Loaded {count} restaurant PDFs and {chunks} text chunks")
+    
+    st.markdown(
+        f"""
+        <div style="
+            background-color: #FFFDF9;
+            border: 1px solid #D9C8AC;
+            border-left: 4px solid #B89560;
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin: 16px 0 24px 0;
+            color: #651D32;
+        ">
+            <div style="
+                font-size: 12px;
+                letter-spacing: 2px;
+                font-weight: 700;
+                color: #9A7650;
+            ">
+                YOUR GASTRONOMIC GUIDE IS READY
+            </div>
+            <div style="
+                font-size: 18px;
+                font-weight: 600;
+                margin-top: 8px;
+            ">
+                🍷 {count} restaurants to discover
+            </div>
+            <div style="
+                font-size: 13px;
+                color: #746B68;
+                margin-top: 4px;
+            ">
+                Explore Pamplona's culinary scene, powered by {chunks} curated text excerpts.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 except Exception as exc:
     st.error(f"Could not initialize the knowledge base: {type(exc).__name__}: {exc}")
     st.stop()
